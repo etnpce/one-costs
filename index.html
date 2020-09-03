@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>1 - Costs Exploration</title>
+<script defer src="https://d3js.org/d3.v6.min.js"></script>
+<script defer type="text/javascript" src='script.js'> </script>
+<body>
+  <h1> 1 - Costs Exploration </h1>
+  
+  A numbers 1-cost is the minimum number of 1's required to form the number with simple integer arithmetic and exponents. <br>
+  
+  Note: operations are chosen somewhat arbitrarily when multiple tie for best cost. <br>
+  
+  The length of the hanging line under a point is the cost of the second argument to the operation forming that point. Thus, the empty space underneath encodes the cost of the first argument. <br>
+  
+  I can provide results for higher max N, or results for subsets of the operators, if need be <br>
+  
+  <h3> 1-Costs Exploration </h3> 
+  Each point displays the minimum number of ones to form N from simple arithmetic on ones.  
+  The color and shape are determined by the outermost operation, and the length of the hanging line is determined by the 1-cost of the second argument for the outer operation
+  
+  <form>
+    <div>
+      <span style="font: 700 0.9rem sans-serif; margin-bottom: 3px;">N for first displayed cost: </span>
+      <input id='startN' type="number" min="1" max="1000" step="1" value="1" style='width: 4em'>
+      <input id='startNR' type="range" min="1" max="1000" step="1" value="1">
+    </div>
+    <div>
+      <span style="font: 700 0.9rem sans-serif; margin-bottom: 3px;">N for last displayed cost: </span>
+      <input id='endN' type="number" min="1" max="1000" step="1" value="200" style='width: 4em'>
+      <input id='endNR' type="range" min="1" max="1000" step="1" value="200">
+    </div>
+  </form>
+  
+  <!-- TODO move into separate file (also look at modification) -->
+  <style>
+    .legend {
+      display: flex;
+      min-height: 33px;
+      font: 15px sans-serif;
+      margin-left: ${margin.left}px;
+    }
+    
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin-right: 10px;
+    }
+  </style>
+  
+  <!-- cloned from auto-generated legend in observable -->
+  <div class="legend">
+    <div class="legend-item">
+      <svg viewBox="-10 -10 20 20" width="20" height="20" style="margin-right: 3px">
+        <path fill="#1b9e77" d="M1.3220196794126151,0.7632684177828561L1.3220196794126151,3.4073077766080866L-1.3220196794126151,3.4073077766080866L-1.3220196794126151,0.763268417782856L-3.6118249327611833,-0.5587512616297592L-2.289805253348568,-2.8485565149783274L0,-1.5265368355657123L2.289805253348568,-2.8485565149783274L3.6118249327611833,-0.5587512616297592Z"></path>
+      </svg>
+      =
+    </div>
+    <div class="legend-item">
+      <svg viewBox="-10 -10 20 20" width="20" height="20" style="margin-right: 3px">
+        <path fill="#d95f02" d="M-3.2863353450309964,-1.0954451150103321L-1.0954451150103321,-1.0954451150103321L-1.0954451150103321,-3.2863353450309964L1.0954451150103321,-3.2863353450309964L1.0954451150103321,-1.0954451150103321L3.2863353450309964,-1.0954451150103321L3.2863353450309964,1.0954451150103321L1.0954451150103321,1.0954451150103321L1.0954451150103321,3.2863353450309964L-1.0954451150103321,3.2863353450309964L-1.0954451150103321,1.0954451150103321L-3.2863353450309964,1.0954451150103321Z"></path>
+      </svg>
+      +
+    </div>
+    <div class="legend-item">
+      <svg viewBox="-10 -10 20 20" width="20" height="20" style="margin-right: 3px">
+        <path fill="#7570b3" d="M0,-4.623798676056609L1.0381074818105323,-1.4288323694698744L4.397493860900542,-1.4288323694698746L1.6796931895450045,0.5457654009114442L2.7178006713555374,3.7407317074981785L3.3306690738754696e-16,1.7661339371168596L-2.7178006713555365,3.740731707498179L-1.6796931895450045,0.5457654009114447L-4.397493860900542,-1.4288323694698735L-1.0381074818105325,-1.4288323694698741Z"></path>
+      </svg>
+      *
+    </div>
+    <div class="legend-item">
+      <svg viewBox="-10 -10 20 20" width="20" height="20" style="margin-right: 3px">
+        <path fill="#e7298a" d="M0,-4.559014113909555L2.6321480259049848,0L0,4.559014113909555L-2.6321480259049848,0Z"></path>
+      </svg>
+      ^
+    </div>
+    <div class="legend-item">
+      <svg viewBox="-10 -10 20 20" width="20" height="20" style="margin-right: 3px">
+        <path fill="#66a61e" d="M0,-4.298279727294168L3.7224194364083982,2.149139863647084L-3.7224194364083982,2.149139863647084Z"></path>
+      </svg>
+      -
+    </div>
+    <div class="legend-item">
+      <svg viewBox="-10 -10 20 20" width="20" height="20" style="margin-right: 3px">
+        <path fill="#e6ab02" d="M-2.449489742783178,-2.449489742783178h4.898979485566356v4.898979485566356h-4.898979485566356Z"></path>
+      </svg>
+      /
+    </div>
+  </div>
+  
+  <div id='graph'>
+    Generating Plot...
+  </div>
+</body>
